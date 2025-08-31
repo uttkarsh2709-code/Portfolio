@@ -1,0 +1,487 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #eaf2f8; /* Light blueish */
+  color: #2c3e50;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #1c1c1c;
+  color: #ddd;
+}
+
+/* Container for width */
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Box styling for sections */
+.box {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 30px 40px;
+  margin: 20px 0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 700px;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+/* Dark mode box background */
+body.dark-mode .box {
+  background: #292929;
+  box-shadow: 0 10px 20px rgba(255,255,255,0.07);
+}
+
+/* Header */
+header h1 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 900;
+  color: #0072ff;
+}
+
+body.dark-mode header h1 {
+  color: #66b2ff;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+body.dark-mode .subtitle {
+  color: #aaa;
+}
+
+/* Navigation */
+nav {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+nav a {
+  color: #0072ff;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 18px;
+  font-size: 1.05rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #00bcd4;
+}
+
+body.dark-mode nav a {
+  color: #66b2ff;
+}
+
+body.dark-mode nav a:hover {
+  color: #00e5ff;
+}
+
+/* Section Headings */
+h2 {
+  font-size: 2.2rem;
+  border-left: 6px solid #0072ff;
+  padding-left: 15px;
+  margin-bottom: 25px;
+  color: #004bb5;
+}
+
+body.dark-mode h2 {
+  border-left-color: #66b2ff;
+  color: #aad4ff;
+}
+
+/* Profile Picture */
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 25px auto;
+  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05) rotate(3deg);
+}
+
+.about-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #f0f4f8;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.about-section h2,
+.about-section h3 {
+  color: #ffd700;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.profile-info {
+  flex: 1 1 300px;
+  max-width: 350px;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 5px solid #ffd700;
+  box-shadow: 0 0 15px #ffd700;
+  margin-bottom: 20px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05) rotate(3deg);
+}
+
+.profile-info p {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.skills-progress {
+  flex: 1 1 350px;
+  max-width: 400px;
+}
+
+.skill-bar {
+  margin-bottom: 20px;
+}
+
+.skill-bar span {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #ffd700;
+}
+
+.progress {
+  background: #333c55;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 18px;
+}
+
+.progress-fill {
+  background: #ffd700;
+  height: 100%;
+  border-radius: 20px 0 0 20px;
+  transition: width 1s ease-in-out;
+}
+
+.tech-carousel {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background: #23395d;
+  padding: 15px 0;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scrollTech 20s linear infinite;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e3c72;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1em;
+  color: #ffd700;
+  box-shadow: 0 0 8px #ffd700;
+  cursor: default;
+  user-select: none;
+}
+
+.tech-item i {
+  font-size: 1.6em;
+}
+
+/* Scroll animation for carousel */
+@keyframes scrollTech {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 8)); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skills-progress, .profile-info {
+    max-width: 100%;
+  }
+
+  .carousel-track {
+    animation-duration: 30s;
+  }
+}
+
+
+/* Paragraph Text */
+p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  color: #3a3a3a;
+}
+
+body.dark-mode p {
+  color: #ccc;
+}
+
+/* Projects */
+.project {
+  background: #f0f9ff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 15px rgba(0, 114, 255, 0.1);
+  transition: background 0.3s;
+}
+
+.project h3 {
+  margin-bottom: 8px;
+  color: #0053ba;
+  font-weight: 700;
+}
+
+.project p {
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.project:hover {
+  background: #d0ebff;
+}
+
+body.dark-mode .project {
+  background: #3b3b3b;
+}
+
+body.dark-mode .project:hover {
+  background: #0053ba;
+  color: white;
+}
+
+body.dark-mode .project h3 {
+  color: #a0cfff;
+}
+
+body.dark-mode .project p {
+  color: #ddd;
+}
+
+/* Skills List */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  list-style: none;
+  margin-top: 10px;
+}
+
+.skills-list li {
+  background: #0072ff;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 6px 10px rgba(0, 114, 255, 0.25);
+  transition: background 0.3s ease;
+}
+
+.skills-list li:hover {
+  background: #005bb5;
+}
+
+body.dark-mode .skills-list li {
+  background: #66b2ff;
+  color: #222;
+}
+
+body.dark-mode .skills-list li:hover {
+  background: #99cfff;
+}
+
+/* Contact Form */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
+  padding: 15px 18px;
+  border: 2px solid #0072ff;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  font-family: inherit;
+  resize: vertical;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+}
+
+textarea {
+  min-height: 130px;
+}
+
+button {
+  padding: 15px;
+  background: #0072ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: 0 8px 15px rgba(0, 114, 255, 0.4);
+}
+
+button:hover {
+  background: #005bb5;
+}
+
+body.dark-mode input, 
+body.dark-mode textarea {
+  background: #222;
+  border-color: #66b2ff;
+  color: #eee;
+}
+
+body.dark-mode input:focus, 
+body.dark-mode textarea:focus {
+  border-color: #99cfff;
+  box-shadow: 0 0 8px rgba(153, 207, 255, 0.7);
+}
+
+body.dark-mode button {
+  background: #66b2ff;
+  color: #222;
+  box-shadow: 0 8px 15px rgba(102, 178, 255, 0.6);
+}
+
+body.dark-mode button:hover {
+  background: #99cfff;
+}
+
+/* Form message */
+#form-message {
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #0072ff;
+}
+
+body.dark-mode #form-message {
+  color: #99cfff;
+}
+.footer-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; /* space between social links and footer text */
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap; /* wrap on small screens */
+}
+
+.social-links {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start; /* align social links left */
+  gap: 15px;
+}
+
+.footer-bottom {
+  flex: 2;
+  font-size: 0.9rem;
+  text-align: right; /* align copyright right */
+  font-weight: 500;
+  color: #d6e9ff;
+}
+
+/* Responsive - stack and center on smaller screens */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center; /* center social icons on small */
+    margin-bottom: 10px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+}
