@@ -37,7 +37,7 @@ body.dark-mode {
   border-radius: 15px;
   padding: 30px 40px;
   margin: 20px 0;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
   max-width: 700px;
   transition: background 0.4s, box-shadow 0.4s;
@@ -46,7 +46,7 @@ body.dark-mode {
 /* Dark mode box background */
 body.dark-mode .box {
   background: #292929;
-  box-shadow: 0 10px 20px rgba(255,255,255,0.07);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.07);
 }
 
 /* Header */
@@ -114,7 +114,7 @@ body.dark-mode h2 {
   color: #aad4ff;
 }
 
-/* Profile Picture */
+/* Profile Picture - Global Style (Less specific, will be overridden by .about-section .profile-pic) */
 .profile-pic {
   width: 180px;
   height: 180px;
@@ -130,17 +130,25 @@ body.dark-mode h2 {
   transform: scale(1.05) rotate(3deg);
 }
 
+/* ================================================= */
+/* MODIFIED: About Section (Dark to White) */
+/* ================================================= */
+
 .about-section {
+  /* CHANGED: Background from dark gradient to white */
+  background: #ffffff; 
+  /* CHANGED: Text color from light to dark for contrast */
+  color: #2c3e50; 
   padding: 60px 0;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: #f0f4f8;
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  /* Adjusted shadow for a light background */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); 
 }
 
 .about-section h2,
 .about-section h3 {
-  color: #ffd700;
+  /* CHANGED: Heading color from gold to a distinct blue for contrast */
+  color: #0072ff; 
   margin-bottom: 20px;
   font-weight: 700;
   text-transform: uppercase;
@@ -165,8 +173,10 @@ body.dark-mode h2 {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  border: 5px solid #ffd700;
-  box-shadow: 0 0 15px #ffd700;
+  /* CHANGED: Border color to match new scheme */
+  border: 5px solid #0072ff; 
+  /* CHANGED: Box shadow to match new scheme */
+  box-shadow: 0 0 15px rgba(0, 114, 255, 0.5); 
   margin-bottom: 20px;
   object-fit: cover;
   transition: transform 0.3s ease;
@@ -179,6 +189,8 @@ body.dark-mode h2 {
 .profile-info p {
   font-size: 1.1em;
   line-height: 1.6;
+  /* Ensure paragraph text is dark on white background */
+  color: #333333; 
 }
 
 .skills-progress {
@@ -195,18 +207,21 @@ body.dark-mode h2 {
   margin-bottom: 6px;
   font-weight: 600;
   font-size: 1.1em;
-  color: #ffd700;
+  /* CHANGED: Skill text color to match new scheme */
+  color: #0072ff; 
 }
 
 .progress {
-  background: #333c55;
+  /* CHANGED: Progress track background to light grey */
+  background: #e0e0e0; 
   border-radius: 20px;
   overflow: hidden;
   height: 18px;
 }
 
 .progress-fill {
-  background: #ffd700;
+  /* CHANGED: Progress fill color to blue */
+  background: #0072ff; 
   height: 100%;
   border-radius: 20px 0 0 20px;
   transition: width 1s ease-in-out;
@@ -221,8 +236,9 @@ body.dark-mode h2 {
   overflow: hidden;
   position: relative;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  background: #23395d;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  /* CHANGED: Carousel container background to a light shade */
+  background: #f0f0f0; 
   padding: 15px 0;
 }
 
@@ -236,14 +252,17 @@ body.dark-mode h2 {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #1e3c72;
+  /* CHANGED: Item background to light blue */
+  background: #d6e9ff; 
   padding: 10px 20px;
   margin: 0 10px;
   border-radius: 30px;
   font-weight: 700;
   font-size: 1.1em;
-  color: #ffd700;
-  box-shadow: 0 0 8px #ffd700;
+  /* CHANGED: Text color to dark blue */
+  color: #004bb5; 
+  /* CHANGED: Shadow color for light background */
+  box-shadow: 0 0 8px rgba(0, 114, 255, 0.3); 
   cursor: default;
   user-select: none;
 }
@@ -254,8 +273,12 @@ body.dark-mode h2 {
 
 /* Scroll animation for carousel */
 @keyframes scrollTech {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-250px * 8)); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 8));
+  }
 }
 
 /* Responsive */
@@ -265,7 +288,8 @@ body.dark-mode h2 {
     align-items: center;
   }
 
-  .skills-progress, .profile-info {
+  .skills-progress,
+  .profile-info {
     max-width: 100%;
   }
 
@@ -273,7 +297,6 @@ body.dark-mode h2 {
     animation-duration: 30s;
   }
 }
-
 
 /* Paragraph Text */
 p {
@@ -373,7 +396,8 @@ form {
   gap: 15px;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 15px 18px;
   border: 2px solid #0072ff;
   border-radius: 8px;
@@ -383,7 +407,8 @@ input, textarea {
   resize: vertical;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: #00bcd4;
   box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
@@ -410,14 +435,14 @@ button:hover {
   background: #005bb5;
 }
 
-body.dark-mode input, 
+body.dark-mode input,
 body.dark-mode textarea {
   background: #222;
   border-color: #66b2ff;
   color: #eee;
 }
 
-body.dark-mode input:focus, 
+body.dark-mode input:focus,
 body.dark-mode textarea:focus {
   border-color: #99cfff;
   box-shadow: 0 0 8px rgba(153, 207, 255, 0.7);
@@ -444,6 +469,7 @@ body.dark-mode button:hover {
 body.dark-mode #form-message {
   color: #99cfff;
 }
+
 .footer-container {
   max-width: 900px;
   margin: 0 auto;
