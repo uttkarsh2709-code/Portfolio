@@ -1,4 +1,6 @@
-// Typing effect for name
+// =============================
+// ✨ Typing Effect for Name
+// =============================
 const typedName = document.getElementById("typed-name");
 const nameText = "Uttkarsh Raj";
 let index = 0;
@@ -7,66 +9,101 @@ function typeName() {
   if (index < nameText.length) {
     typedName.textContent += nameText.charAt(index);
     index++;
-    setTimeout(typeName, 150);
+    setTimeout(typeName, 120);
+  } else {
+    typedName.classList.add("glow");
   }
 }
 
-// Start typing effect on DOM load
 document.addEventListener("DOMContentLoaded", () => {
   typeName();
+  initTheme();
 });
 
-// Dark mode toggle
+// =============================
+// 🌙 Dark / Light Mode Toggle
+// =============================
 const toggleBtn = document.getElementById("toggle-mode");
+
+function initTheme() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    toggleBtn.textContent = "☀️ Light Mode";
+  } else {
+    toggleBtn.textContent = "🌙 Dark Mode";
+  }
+}
 
 toggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 
-  // Change button text accordingly
   if (document.body.classList.contains("dark-mode")) {
-    toggleBtn.textContent = "Light Mode";
+    toggleBtn.textContent = "☀️ Light Mode";
+    localStorage.setItem("theme", "dark");
   } else {
-    toggleBtn.textContent = "Dark Mode";
+    toggleBtn.textContent = "🌙 Dark Mode";
+    localStorage.setItem("theme", "light");
   }
 });
 
-// server.js (Node.js Express example)
+// =============================
+// 🚀 Animate Skill Bars on Scroll
+// =============================
+const skills = document.querySelectorAll(".progress-fill");
 
-const express = require('express');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.post('/contact', async (req, res) => {
-  const { name, email, message } = req.body;
-
-  // Set up transporter with your email provider
-  let transporter = nodemailer.createTransport({
-    service: 'Gmail', // or your email provider
-    auth: {
-      user: 'your-email@gmail.com',
-      pass: 'your-email-password-or-app-password',
-    },
+function animateSkills() {
+  skills.forEach(skill => {
+    const level = skill.getAttribute("data-level");
+    skill.style.width = level + "%";
   });
+}
 
-  let mailOptions = {
-    from: email,
-    to: 'your-email@gmail.com',
-    subject: `New contact from ${name}`,
-    text: message,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    res.json({ success: true, message: 'Message sent!' });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Failed to send message.' });
-  }
+window.addEventListener("scroll", () => {
+  const trigger = window.innerHeight / 1.3;
+  skills.forEach(skill => {
+    const top = skill.getBoundingClientRect().top;
+    if (top < trigger) {
+      animateSkills();
+    }
+  });
 });
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
-});
+// =============================
+// 💬 Contact Form Submission
+// =============================
+const contactForm = document.getElementById("contact-form");
+const formMsg = document.getElementById("form-msg");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    formMsg.textContent = "Sending...";
+    formMsg.style.color = "#60a5fa";
+
+    try {
+      const res = await fetch("http://localhost:3000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        formMsg.textContent = "✅ Message sent successfully!";
+        formMsg.style.color = "#4ade80";
+        contactForm.reset();
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      formMsg.textContent = "❌ Failed to send message. Try again later.";
+      formMsg.style.color = "#f87171";
+    }
+  });
+}
