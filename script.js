@@ -1,109 +1,66 @@
-// =============================
-// ✨ Typing Effect for Name
-// =============================
+// ✅ Animated Typing Name
 const typedName = document.getElementById("typed-name");
 const nameText = "Uttkarsh Raj";
 let index = 0;
 
-function typeName() {
+function type() {
   if (index < nameText.length) {
     typedName.textContent += nameText.charAt(index);
     index++;
-    setTimeout(typeName, 120);
-  } else {
-    typedName.classList.add("glow");
+    setTimeout(type, 150);
   }
 }
+window.onload = type;
 
-document.addEventListener("DOMContentLoaded", () => {
-  typeName();
-  initTheme();
-});
-
-// =============================
-// 🌙 Dark / Light Mode Toggle
-// =============================
-const toggleBtn = document.getElementById("toggle-mode");
-
-function initTheme() {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    toggleBtn.textContent = "☀️ Light Mode";
-  } else {
-    toggleBtn.textContent = "🌙 Dark Mode";
-  }
-}
-
+// ✅ Dark/Light Mode Toggle
+const toggleBtn = document.getElementById("theme-toggle");
 toggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
-
+  const icon = toggleBtn.querySelector("i");
   if (document.body.classList.contains("dark-mode")) {
-    toggleBtn.textContent = "☀️ Light Mode";
-    localStorage.setItem("theme", "dark");
+    icon.classList.replace("fa-moon", "fa-sun");
   } else {
-    toggleBtn.textContent = "🌙 Dark Mode";
-    localStorage.setItem("theme", "light");
+    icon.classList.replace("fa-sun", "fa-moon");
   }
 });
 
-// =============================
-// 🚀 Animate Skill Bars on Scroll
-// =============================
-const skills = document.querySelectorAll(".progress-fill");
+// ✅ Animated Skill Bars on Scroll
+const skillBars = document.querySelectorAll(".skill-bar");
 
 function animateSkills() {
-  skills.forEach(skill => {
-    const level = skill.getAttribute("data-level");
-    skill.style.width = level + "%";
+  skillBars.forEach((bar) => {
+    const rect = bar.getBoundingClientRect();
+    const fill = bar.querySelector(".progress-fill");
+    if (rect.top < window.innerHeight - 100) {
+      const width = bar.getAttribute("data-skill");
+      fill.style.width = width + "%";
+    }
   });
 }
 
-window.addEventListener("scroll", () => {
-  const trigger = window.innerHeight / 1.3;
-  skills.forEach(skill => {
-    const top = skill.getBoundingClientRect().top;
-    if (top < trigger) {
-      animateSkills();
-    }
+window.addEventListener("scroll", animateSkills);
+animateSkills(); // initial check
+
+// ✅ Smooth Scroll (already via CSS, but reinforce for Safari)
+document.querySelectorAll("nav a").forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth",
+    });
   });
 });
 
-// =============================
-// 💬 Contact Form Submission
-// =============================
-const contactForm = document.getElementById("contact-form");
-const formMsg = document.getElementById("form-msg");
+// ✅ Contact Form Feedback
+document.getElementById("contact-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const formMessage = document.getElementById("form-message");
+  formMessage.textContent = "Thanks for your message! I’ll get back soon.";
+  formMessage.style.color = "#00c6ff";
+  this.reset();
 
-if (contactForm) {
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  setTimeout(() => {
+    formMessage.textContent = "";
+  }, 4000);
+});
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    formMsg.textContent = "Sending...";
-    formMsg.style.color = "#60a5fa";
-
-    try {
-      const res = await fetch("http://localhost:3000/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        formMsg.textContent = "✅ Message sent successfully!";
-        formMsg.style.color = "#4ade80";
-        contactForm.reset();
-      } else {
-        throw new Error();
-      }
-    } catch (error) {
-      formMsg.textContent = "❌ Failed to send message. Try again later.";
-      formMsg.style.color = "#f87171";
-    }
-  });
-}
